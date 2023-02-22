@@ -1,0 +1,62 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         
+    4 00000000         __Vectors
+    5 00000000         
+    6 00000000 10001000        DCD              0X10001000
+    7 00000004 00000000        DCD              Reset_Handler
+    8 00000008                 ALIGN
+    9 00000008                 AREA             mycode, CODE, READONLY
+   10 00000000                 ENTRY
+   11 00000000                 EXPORT           Reset_Handler
+   12 00000000         
+   13 00000000         Reset_Handler
+   14 00000000 4E14            LDR              R6,=RESULI
+   15 00000002 F04F 0200       MOV              R2,#0
+   16 00000006 4813            LDR              R0,=VAL1
+   17 00000008 6801            LDR              R1,[R0]
+   18 0000000A 290A    UP      CMP              R1,#0xA
+   19 0000000C D304            BCC              STORE
+   20 0000000E F1A1 010A       SUB              R1,#0xA
+   21 00000012 F101 0101       ADD              R1,#01
+   22 00000016 E7F8            B                UP
+   23 00000018 F806 1B01 
+                       STORE   STRB             R1,[R6],#1
+   24 0000001C 4611            MOV              R1,R2
+   25 0000001E 290A            CMP              R1,#0xA
+   26 00000020 D2F3            BCS              UP
+   27 00000022 F806 1B01       STRB             R1,[R6],#1
+   28 00000026 4633            MOV              R3,R6
+   29 00000028 4A0A            LDR              R2,=PACKED
+   30 0000002A 4E0A            LDR              R6,=RESULT
+   31 0000002C EBA3 0406       SUB              R4,R3,R6
+   32 00000030 F816 0B01 
+                       UP1     LDRB             R0,[R6],#1
+   33 00000034 F816 1B01       LDRB             R1,[R6],#1
+   34 00000038 EA4F 1101       LSL              R1,#4
+   35 0000003C EA41 0100       ORR              R1,R0
+   36 00000040 F802 1B01       STRB             R1,[R2],#1
+   37 00000044 F1A4 0402       SUB              R4,#2
+   38 00000048 2C01            CMP              R4,#1
+   39 0000004A DAF1            BGE              UP1
+   40 0000004C         STOP
+   41 0000004C E7FE            B                STOP
+   42 0000004E         
+   43 0000004E 00 00 11110101 
+                       N1      DCD              0x11110101
+   44 00000054 00000000 
+              00000000 
+              00000000 
+              00000000         AREA             mydata, DATA, READWRITE
+   45 00000000 00000000 
+                       DST     DCD              0
+   46 00000004                 END
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\q2.d -
+o.\q2.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NX
+P\LPC17xx --predefine="__EVAL SETA 1" --list=.\q2.lst Q2.s
