@@ -1,0 +1,1 @@
+.\samp.o: samp.s

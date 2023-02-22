@@ -1,0 +1,2 @@
+Dependencies for Project 'samp', Target 'Target 1': (DO NOT MODIFY !)
+F (.\samp.s)(0x63E38088)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\NXP\LPC17xx--list .\samp.lst --xref -o .\samp.o --depend .\samp.d)
