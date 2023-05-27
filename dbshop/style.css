@@ -1,0 +1,32 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+.card-img-top{
+    object-fit: contain;
+}
+
+.admin_img{
+    width: 100px;
+    object-fit: contain;
+}
+
+.cart-img {
+    width: 180px;
+    height: 200px;
+}
+
+button{
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 300px;
+    outline: none;
+    background-color: cornflowerblue;
+    color: aliceblue;
+    padding: 13px 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+}
