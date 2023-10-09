@@ -1,0 +1,10 @@
+Symbol Table:
+S.No	Lexeme Name	Return Type	Data Type	Token Type	No.of arguement
+1	main		void		-		FUNC		-
+2	a		-		INT		VAR		-
+3	b		-		INT		VAR		-	
+
+Input:
+void main(){
+	int a,b;
+	}
