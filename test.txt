@@ -1,1 +1,6 @@
 https://chat.openai.com/share/23ac83a9-9cd7-4b46-8d9b-e2f50794f837
+
+gcc s.c -o server
+gcc c.c -o c1
+gcc c.c -o c2
+https://chat.openai.com/share/e0489c49-9ce9-418d-8480-33cc12506d81 
