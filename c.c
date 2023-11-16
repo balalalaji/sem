@@ -6,12 +6,13 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#define MAX_ANSWER_LEN 50
+#define MAX_ANSWER_LEN 256
+#define MAX_QUESTIONS 5
 
 int main() {
     int c_sock;
     char buf[MAX_ANSWER_LEN];
-    char msg[MAX_ANSWER_LEN];
+    char msg[MAX_ANSWER_LEN],val[MAX_ANSWER_LEN];
 
     c_sock = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in client;
@@ -27,21 +28,30 @@ int main() {
     }
 
     printf("Establishing connection to the game server...\n\n");
+    int i=0;
 
-    while (1) {
-        int bytes_received = recv(c_sock, msg, MAX_ANSWER_LEN, 0);
+    while (i<MAX_QUESTIONS) {
+        msg[0]=0,buf[0]=0,val[0]=0;
+        int bytes_received = read(c_sock, msg, MAX_ANSWER_LEN);
         if (bytes_received <= 0) {
-            break;
+            close(c_sock);
         }
-
-        msg[bytes_received] = '\0';
-        printf("Question: %s\n", msg);
-
-        fgets(buf, MAX_ANSWER_LEN, stdin);
-        buf[strcspn(buf, "\n")] = 0; // Remove newline character from the input
-
-        send(c_sock, buf, strlen(buf), 0);
+        printf("%s\n", msg);
+        scanf("%s",buf);
+        write(c_sock, buf, sizeof(buf));
+        bytes_received = read(c_sock, val, MAX_ANSWER_LEN);
+        if (bytes_received <= 0) {
+            close(c_sock);
+        }
+        printf("%s\n", val);
+        i++;
     }
+    int val_received = read(c_sock, msg, MAX_ANSWER_LEN);
+    if (val_received <= 0) {
+            close(c_sock);
+    }
+    printf("%s\n", msg);
+    
 
     close(c_sock);
     return 0;
